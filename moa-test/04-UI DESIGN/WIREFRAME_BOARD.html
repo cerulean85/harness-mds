@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOA Wireframe Board</title>
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --paper: #ffffff;
+      --ink: #111827;
+      --muted: #6b7280;
+      --line: #9ca3af;
+      --light: #e5e7eb;
+      --lighter: #f9fafb;
+      --note: #fff7ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      line-height: 1.4;
+    }
+
+    .board {
+      padding: 28px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 { font-size: 24px; }
+    h2 { font-size: 15px; }
+    h3 { font-size: 13px; }
+
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .section-title {
+      margin: 30px 0 14px;
+      font-size: 18px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 8px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(120px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .flow-card {
+      border: 2px solid var(--line);
+      background: var(--paper);
+      min-height: 86px;
+      padding: 12px;
+      position: relative;
+    }
+
+    .flow-card:after {
+      content: ">";
+      position: absolute;
+      right: -12px;
+      top: 32px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .flow-card:last-child:after { content: ""; }
+
+    .flow-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .flow-card span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(520px, 1fr));
+      gap: 24px;
+    }
+
+    .screen {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      min-height: 620px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .screen-head {
+      border-bottom: 2px solid var(--ink);
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .screen-id {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .screen-body {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .screen-foot {
+      border-top: 1px solid var(--line);
+      padding: 10px 14px;
+      color: var(--muted);
+      font-size: 11px;
+      background: var(--lighter);
+    }
+
+    .wire {
+      border: 1.5px solid var(--line);
+      background: var(--lighter);
+      padding: 10px;
+      min-height: 44px;
+      color: #374151;
+      font-size: 12px;
+    }
+
+    .wire.dark {
+      background: var(--light);
+      border-color: var(--ink);
+      font-weight: 700;
+    }
+
+    .wire.center {
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .wire.tall { min-height: 128px; }
+    .wire.xl { min-height: 260px; }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 10px;
+    }
+
+    .layout-right {
+      display: grid;
+      grid-template-columns: 1fr 190px;
+      gap: 10px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav-lines {
+      display: grid;
+      gap: 8px;
+    }
+
+    .line {
+      height: 14px;
+      background: #d1d5db;
+      border: 1px solid var(--line);
+    }
+
+    .line.short { width: 55%; }
+    .line.mid { width: 76%; }
+
+    .table {
+      display: grid;
+      gap: 6px;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 34px 1.2fr 1fr 1fr 80px;
+      gap: 6px;
+    }
+
+    .cell {
+      min-height: 28px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 5px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .note {
+      border: 1px dashed #d97706;
+      background: var(--note);
+      padding: 8px;
+      font-size: 11px;
+      color: #7c2d12;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 4px 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .mini-map {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .mini {
+      min-height: 56px;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      padding: 8px;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media (max-width: 1180px) {
+      .screens { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .flow-card:after { content: ""; }
+    }
+
+    @media (max-width: 680px) {
+      .board { padding: 16px; }
+      .header { flex-direction: column; align-items: flex-start; }
+      .meta { text-align: left; }
+      .row, .row-3, .layout, .layout-right, .mini-map { grid-template-columns: 1fr; }
+      .screens { grid-template-columns: minmax(0, 1fr); }
+      .screen { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="board">
+    <header class="header">
+      <div>
+        <h1>MOA 와이어프레임 보드</h1>
+        <p class="meta" style="text-align:left;">기능 배치와 이동 흐름 검토용. 시각 디자인, 컬러, 최종 카피는 포함하지 않는다.</p>
+      </div>
+      <p class="meta">기준 문서: FEATURE_SPEC.yaml, SRS_REVISED.md<br />범위: FS-001 ~ FS-010 / SRS-001 ~ SRS-039</p>
+    </header>
+
+    <h2 class="section-title">A. 핵심 이동 흐름</h2>
+    <section class="flow">
+      <div class="flow-card"><strong>WF-01 인증</strong><span>회원가입 / 로그인 / 재인증</span></div>
+      <div class="flow-card"><strong>WF-02 대시보드</strong><span>알람, 최근 질의, 시스템 상태</span></div>
+      <div class="flow-card"><strong>WF-03 작업 콘솔</strong><span>질의, 근거 답변, 음성, 명령</span></div>
+      <div class="flow-card"><strong>WF-04 알람</strong><span>알람 상세, 가이드, 통지</span></div>
+      <div class="flow-card"><strong>WF-05 자료</strong><span>업로드, VectorDB, 정책</span></div>
+      <div class="flow-card"><strong>WF-06 분석</strong><span>조건 분석, 차트, 내보내기</span></div>
+      <div class="flow-card"><strong>WF-07 관리자</strong><span>사용자, 모델, 로그, 백업</span></div>
+    </section>
+
+    <h2 class="section-title">B. 화면 와이어프레임</h2>
+    <section class="screens">
+      <article class="screen">
+        <div class="screen-head">
+          <h2>인증</h2>
+          <span class="screen-id">WF-01 · FS-001</span>
+        </div>
+        <div class="screen-body">
+          <div class="row">
+            <div class="wire tall">
+              <h3>로그인 폼</h3>
+              <div class="line mid"></div><br />
+              <div class="line"></div><br />
+              <div class="line short"></div>
+            </div>
+            <div class="wire tall">
+              <h3>회원가입 폼</h3>
+              <div class="line mid"></div><br />
+              <div class="line"></div><br />
+              <div class="line"></div><br />
+              <div class="line short"></div>
+            </div>
+          </div>
+          <div class="wire">상태 영역: 로그인 실패 횟수, 15분 계정 잠금, 세션 만료 5분 전 알림</div>
+          <div class="note">분기: 중복 이메일, 인증 실패, 세션 만료 후 재인증</div>
+        </div>
+        <div class="screen-foot">입력: 이메일, 비밀번호, 이름 · 출력: 세션 발급 또는 오류 사유</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>사용자 대시보드</h2>
+          <span class="screen-id">WF-02 · 관문 화면</span>
+        </div>
+        <div class="screen-body">
+          <div class="layout">
+            <div class="wire tall">
+              <h3>좌측 메뉴</h3>
+              <div class="nav-lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line short"></div>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="row-3">
+                <div class="wire center">Critical 알람</div>
+                <div class="wire center">최근 질의</div>
+                <div class="wire center">응답 성능</div>
+              </div>
+              <div class="wire tall">최근 알람 / 최근 파일 / 최근 분석 요약 목록</div>
+              <div class="mini-map">
+                <div class="mini">질의 시작</div>
+                <div class="mini">파일 업로드</div>
+                <div class="mini">알람 보기</div>
+                <div class="mini">분석 실행</div>
+                <div class="mini">이력 조회</div>
+              </div>
+            </div>
+          </div>
+          <div class="note">목적: 사용자가 어느 작업으로 들어갈지 선택하는 허브. 관리자 메뉴는 관리자에게만 노출.</div>
+        </div>
+        <div class="screen-foot">권한: 일반 사용자, 관리자</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>통합 작업 콘솔</h2>
+          <span class="screen-id">WF-03 · FS-003/004/006/009</span>
+        </div>
+        <div class="screen-body">
+          <div class="layout-right">
+            <div class="stack">
+              <div class="wire dark">상단: 대화 제목, 새 대화, 내보내기</div>
+              <div class="wire xl">
+                <h3>대화 타임라인</h3>
+                <br />
+                <div class="wire">사용자 질의 버블</div>
+                <br />
+                <div class="wire tall">AI 답변 카드: 요약 / 원인 / 조치 / 근거 / 출처 / 이미지</div>
+                <br />
+                <div class="wire">피드백: 좋아요 / 싫어요 / 사유 태그</div>
+              </div>
+              <div class="wire">하단 입력: 파일 첨부 + 마이크 + 질의 입력 + 전송</div>
+            </div>
+            <div class="stack">
+              <div class="wire tall">데이터 소스 선택/자동 라우팅<br />선택 DB, 제외 DB, 제외 사유</div>
+              <div class="wire tall">음성 상태<br />핫워드, STT, TTS, 오류 대체 입력</div>
+              <div class="wire tall">설비 제어 명령<br />요약, 대상, 위험 등급, 재확인</div>
+            </div>
+          </div>
+          <div class="note">고위험 명령은 승인자/관리자 추가 승인 화면으로 이동. 권한 없는 DB는 검색 대상에서 제외.</div>
+        </div>
+        <div class="screen-foot">핵심: 답변 근거 표시와 명령 실행 재확인을 같은 작업 맥락 안에 배치</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>알람 센터</h2>
+          <span class="screen-id">WF-04 · FS-002</span>
+        </div>
+        <div class="screen-body">
+          <div class="row">
+            <div class="wire xl">
+              <h3>실시간 알람 목록</h3>
+              <div class="table">
+                <div class="table-row"><div class="cell"></div><div class="cell">코드</div><div class="cell">설비</div><div class="cell">심각도</div><div class="cell">상태</div></div>
+                <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+                <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="wire tall">알람 상세</div>
+              <div class="wire tall">처리 가이드</div>
+              <div class="wire">Email/SMS 통지 결과</div>
+            </div>
+          </div>
+          <div class="wire tall">히스토리 필터: 기간, 심각도, 설비, 처리 상태</div>
+          <div class="note">처리 가이드 미등록 시 관리자 알림 생성. 네트워크 제한 시 화면 알림과 관리자 로그로 대체.</div>
+        </div>
+        <div class="screen-foot">입력: 외부 설비 알람 · 출력: 화면 알림, 가이드, 통지 로그</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>자료 업로드 / VectorDB</h2>
+          <span class="screen-id">WF-05 · FS-005</span>
+        </div>
+        <div class="screen-body">
+          <div class="row">
+            <div class="wire tall center">Drag & Drop 업로드 영역<br />허용 확장자 / 용량 / 개수 표시</div>
+            <div class="wire tall">VectorDB 생성 폼<br />별칭, 목적, 공유 범위, 기존 DB 선택</div>
+          </div>
+          <div class="wire">정책 검증 상태: 확장자, MIME, 용량, 악성 파일 검사, 차단 사유</div>
+          <div class="wire xl">
+            <h3>업로드 및 벡터화 이력</h3>
+            <div class="table">
+              <div class="table-row"><div class="cell"></div><div class="cell">파일</div><div class="cell">업로더</div><div class="cell">검증</div><div class="cell">벡터화</div></div>
+              <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+              <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+              <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-foot">정책 차단 요청은 다운로드/삭제에도 동일하게 사유 표시</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>통계 분석 / 리포트</h2>
+          <span class="screen-id">WF-06 · FS-008</span>
+        </div>
+        <div class="screen-body">
+          <div class="row">
+            <div class="wire xl">
+              <h3>분석 조건 패널</h3>
+              <br />
+              <div class="line"></div><br />
+              <div class="line"></div><br />
+              <div class="line mid"></div><br />
+              <div class="wire tall">자연어 분석 요청 입력</div>
+            </div>
+            <div class="wire xl center">차트 또는 표 결과 영역<br />라인 / 막대 / 도넛 / 히스토그램</div>
+          </div>
+          <div class="wire">결과 요약 / 근거 / 조회 DB / 생성 시각</div>
+          <div class="chip-row">
+            <span class="chip">PDF 내보내기</span>
+            <span class="chip">CSV 내보내기</span>
+            <span class="chip">XLSX 내보내기</span>
+          </div>
+          <div class="note">차트가 부적절하면 표 또는 텍스트 요약으로 대체.</div>
+        </div>
+        <div class="screen-foot">권한 없는 설비 DB 요청 시 결과 생성을 중단하고 오류 표시</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>이력 / 피드백</h2>
+          <span class="screen-id">WF-07 · FS-009</span>
+        </div>
+        <div class="screen-body">
+          <div class="wire">검색 필터: 기간, 키워드, 데이터 소스, 피드백 값</div>
+          <div class="wire xl">
+            <h3>질의/응답 이력 목록</h3>
+            <div class="table">
+              <div class="table-row"><div class="cell">선택</div><div class="cell">시각</div><div class="cell">질의</div><div class="cell">답변 ID</div><div class="cell">피드백</div></div>
+              <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+              <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+              <div class="table-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+            </div>
+          </div>
+          <div class="wire">액션: 상세 보기, 개별 삭제, 다중 선택 삭제, 피드백 사유 입력</div>
+          <div class="note">삭제는 소프트 삭제. 사용자는 본인 이력만 조회/삭제, 관리자는 감사 목적 조회.</div>
+        </div>
+        <div class="screen-foot">답변 카드에서 저장된 좋아요/싫어요와 연결</div>
+      </article>
+
+      <article class="screen">
+        <div class="screen-head">
+          <h2>관리자 / 운영</h2>
+          <span class="screen-id">WF-08 · FS-007/010</span>
+        </div>
+        <div class="screen-body">
+          <div class="layout">
+            <div class="wire xl">
+              <h3>관리 메뉴</h3>
+              <div class="nav-lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="row">
+                <div class="wire tall">사용자 제지<br />로그인, 업로드, 질의, 내보내기 제한</div>
+                <div class="wire tall">모델 버전<br />호환성 확인, 변경 이력, 롤백</div>
+              </div>
+              <div class="row">
+                <div class="wire tall">파일 정책<br />사용자, 그룹, 전체 우선순위</div>
+                <div class="wire tall">백업 상태<br />일일, 월간, RTO/RPO</div>
+              </div>
+              <div class="wire xl">시스템 로그 검색: 기간, 사용자, 리소스, 이벤트 유형, 심각도</div>
+            </div>
+          </div>
+          <div class="note">일반 사용자가 접근하면 접근 거부와 보안 로그를 남김.</div>
+        </div>
+        <div class="screen-foot">관리자 전용. 운영 설정과 백업은 시스템/배치 권한과 연결.</div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

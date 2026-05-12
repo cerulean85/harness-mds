@@ -1,0 +1,119 @@
+source: SRS.md
+coverage:
+  SRS-001:
+    type: NFR
+    mapped_to: [FUNCTION_TREE:1.11, FEATURE_SPEC:FS-010, USE_CASES:UC-032, NFR:NFR-001]
+  SRS-002:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.1, FEATURE_SPEC:FS-001, USE_CASES:UC-001, PERMISSION_MATRIX:회원가입]
+  SRS-003:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.1, FEATURE_SPEC:FS-001, USE_CASES:UC-002, PERMISSION_MATRIX:로그인]
+  SRS-004:
+    type: Security
+    mapped_to: [FUNCTION_TREE:1.1, FEATURE_SPEC:FS-001, USE_CASES:UC-002, USE_CASES:UC-003, NFR:NFR-005, NFR:NFR-006, NFR:NFR-007]
+  SRS-005:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.2, FEATURE_SPEC:FS-002, USE_CASES:UC-005, PERMISSION_MATRIX:알람_처리_가이드_조회]
+  SRS-006:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.2, FEATURE_SPEC:FS-002, USE_CASES:UC-004, USE_CASES:UC-006]
+  SRS-007:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.2, FEATURE_SPEC:FS-002, USE_CASES:UC-007, NFR:NFR-014, NFR:NFR-015]
+  SRS-008:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.2, FEATURE_SPEC:FS-002, USE_CASES:UC-008, NFR:NFR-014, NFR:NFR-015]
+  SRS-009:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.3, FEATURE_SPEC:FS-003, USE_CASES:UC-009, NFR:NFR-008]
+  SRS-010:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.4, FEATURE_SPEC:FS-004, USE_CASES:UC-010]
+  SRS-011:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.4, FEATURE_SPEC:FS-004, USE_CASES:UC-011]
+  SRS-012:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.4, FEATURE_SPEC:FS-004, USE_CASES:UC-012]
+  SRS-013:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.5, FEATURE_SPEC:FS-005, USE_CASES:UC-013]
+  SRS-014:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.5, FEATURE_SPEC:FS-005, USE_CASES:UC-013, NFR:NFR-016]
+  SRS-015:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.5, FEATURE_SPEC:FS-005, USE_CASES:UC-014]
+  SRS-016:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.5, FEATURE_SPEC:FS-005, USE_CASES:UC-015]
+  SRS-017:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.4, FEATURE_SPEC:FS-004, USE_CASES:UC-012]
+  SRS-018:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.4, FEATURE_SPEC:FS-004, USE_CASES:UC-012]
+  SRS-019:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.4, FEATURE_SPEC:FS-004, USE_CASES:UC-012]
+  SRS-020:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.6, FEATURE_SPEC:FS-006, USE_CASES:UC-016, NFR:NFR-010]
+  SRS-021:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.6, FEATURE_SPEC:FS-006, USE_CASES:UC-017, NFR:NFR-011]
+  SRS-022:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.6, FEATURE_SPEC:FS-006, USE_CASES:UC-016]
+  SRS-023:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.6, FEATURE_SPEC:FS-006, USE_CASES:UC-018]
+  SRS-024:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.7, FEATURE_SPEC:FS-007, USE_CASES:UC-019, USE_CASES:UC-020]
+  SRS-025:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.7, FEATURE_SPEC:FS-007, USE_CASES:UC-021]
+  SRS-026:
+    type: Security
+    mapped_to: [FUNCTION_TREE:1.7, FEATURE_SPEC:FS-005, USE_CASES:UC-022, NFR:NFR-009]
+  SRS-027:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.7, FEATURE_SPEC:FS-007, USE_CASES:UC-023, NFR:NFR-017]
+  SRS-028:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.8, FEATURE_SPEC:FS-008, USE_CASES:UC-024]
+  SRS-029:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.8, FEATURE_SPEC:FS-008, USE_CASES:UC-025]
+  SRS-030:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.8, FEATURE_SPEC:FS-008, USE_CASES:UC-026]
+  SRS-031:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.9, FEATURE_SPEC:FS-004, USE_CASES:UC-027]
+  SRS-032:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.9, FEATURE_SPEC:FS-004, USE_CASES:UC-028]
+  SRS-033:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.10, FEATURE_SPEC:FS-009, USE_CASES:UC-029, NFR:NFR-019]
+  SRS-034:
+    type: Functional
+    mapped_to: [FUNCTION_TREE:1.10, FEATURE_SPEC:FS-009, USE_CASES:UC-030, NFR:NFR-020]
+  SRS-035:
+    type: NFR
+    mapped_to: [FUNCTION_TREE:1.11, FEATURE_SPEC:FS-010, NFR:NFR-002, NFR:NFR-004]
+  SRS-036:
+    type: NFR
+    mapped_to: [FUNCTION_TREE:1.6, FEATURE_SPEC:FS-010, USE_CASES:UC-016, USE_CASES:UC-017, NFR:NFR-003, NFR:NFR-004]
+  SRS-037:
+    type: NFR
+    mapped_to: [FUNCTION_TREE:1.11, FEATURE_SPEC:FS-010, NFR:NFR-012, NFR:NFR-022]
+  SRS-038:
+    type: NFR
+    mapped_to: [FUNCTION_TREE:1.11, FEATURE_SPEC:FS-010, USE_CASES:UC-031, NFR:NFR-018]
+  SRS-039:
+    type: NFR
+    mapped_to: [FUNCTION_TREE:1.11, FEATURE_SPEC:FS-010, USE_CASES:UC-021, NFR:NFR-013]
